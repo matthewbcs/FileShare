@@ -1,0 +1,45 @@
+﻿@using TransportApp.WebHelpers
+@model TransportApp.Model.ViewModel.NetworkWizard.NetworkWizardViewModel
+@{
+    ViewBag.Title = "NetworkWizard";
+}
+<script>
+    if (typeof (controllerData) == "undefined") {
+        var controllerData = {};
+    }
+    controllerData.NetworkModel = {
+
+        NetworkQuestionItems: @Html.Raw( new JsonSerializationProcessor().Serialize(Model.QuestionsItems)), 
+            PossibleNetworks:[]
+    }
+
+</script>
+<h2>NetworkWizard</h2>
+<div ng-app="app" ng-controller="NetworkCtrl" class="col-md-4 square">
+    
+    
+        <div ng-repeat="x in NetworkQuestionItems" value="{{x.QuestionId}}">
+        
+            <div>
+                {{x.Question}}
+                <input class="q1Radio" type="radio" id="q1" ng-click="AddNetworks(x.PossibleNetworks)" ng-model="x.Answer" value="true">
+                <label style="font-size: small; font-weight: normal" for="q1"> Yes </label>
+                <input class="q1Radio" type="radio" id="q1" ng-click="RemoveNetwork(x.PossibleNetworks)" ng-model="x.Answer" value="false">
+                <label style="font-size: small; font-weight: normal" for="q1"> No </label>
+            </div>
+            </div>
+   
+    Available Networks 
+    <div ng-repeat="x in PossibleNetworks" >
+       <div>{{x}}</div> 
+
+    </div>
+  
+
+</div>
+@section Scripts{
+
+
+    <script src="~/Scripts/ng-file-upload.min.js"></script>
+    <script src="~/WebHelpers/Assets/Js/NetworkApp.js"></script>
+}

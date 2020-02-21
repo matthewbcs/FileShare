@@ -1,0 +1,221 @@
+﻿@using TransportApp.WebHelpers
+@model TransportApp.Model.ViewModel.TransportViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<script>
+    if (typeof (controllerData) == "undefined") {
+        var controllerData = {};
+    }
+    controllerData.TransportModel = {
+        
+        Docs: [],
+        Messages: [],
+        userAccess: null,
+        AccessCode: null,
+        UploadDocServerResponse: null,
+        Download: false,
+        Upload: false,
+        TransportText: false,
+        TextToSend: null,
+        isExpired: false,
+        RequestPending:false
+    }
+
+</script>
+<style>
+    body {
+        background-color: #111629
+    }
+
+    .square {
+        height: auto;
+        width: 94%;
+        margin-left: 58px;
+        background-color: white;
+        padding-top: 23px;
+        border-radius: 10%;
+    }
+    #Upload :hover {
+        color: black;
+        font-size: larger
+
+    }
+    #Download :hover {
+        color: black;
+        font-size: larger
+    }
+    .imgIcon {
+        width: 13%
+    }
+    .imgIcon2 {
+        width: 29%
+    }
+    .imgIcon3 {
+        width: 13%;
+    }
+    #logo {
+        width: 52%
+    }
+    .actionBlock {
+        background-color: rgb(237, 201, 245);
+        text-align: center;
+       
+    }
+    .resultsBlock {
+        /*background-color: rgb(201, 232, 245);*/
+        text-align: center;
+        padding-top: 10px
+    }
+    .resRow {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: x-large;
+        border-bottom: double;
+        border-top: double;
+        background-color: antiquewhite;
+    }
+    .item {
+        display: inline
+    }
+    .Custom {
+        width: 300px;
+        height: 100px;
+    }
+</style>
+
+
+<div class="row">
+    <div ng-app="app" ng-controller="TransportCtrl" class="col-md-4 square">
+
+        @*<div style="text-align: center">File Transporter</div>*@
+        <div style="text-align: center">
+            <img id="logo" src="~/WebHelpers/Assets/img/fileshare.png" />
+        </div>
+
+        <div style="display: block; width: 100%;text-align: center">
+            <a ng-click="Upload = true;Download = false ;TransportText = false" href="#">
+                <div style="display: inline; padding-right: 12px" id="Upload" ng-click="Upload = true">
+                    <img class="imgIcon" src="~/WebHelpers/Assets/img/upload doc.png" />
+                </div>
+            </a>
+            --
+            <a ng-click="Download = true;Upload = false;TransportText = false" href="#">
+                <div style="padding-top: 10px; display: inline" id="Download" ng-click="Download = true">
+                    <img class="imgIcon2" src="~/WebHelpers/Assets/img/accesscode.png" />
+                </div>
+            </a>
+            --
+            <a ng-click="TransportText = true;Download = false;Upload = false" href="#">
+                <div style="padding-top: 10px; display: inline" id="Download" ng-click="TransportText = true">
+                    <img class="imgIcon3" src="~/WebHelpers/Assets/img/sharetext.png" />
+                </div>
+            </a>
+
+        </div>
+
+        <div ng-show="Download === true">
+            <div class="actionBlock">
+                <div style="padding-top: 10px">Get File or Message</div>
+                <input type="text" ng-model="userAccess" />
+                <input ng-show="RequestPending === false" style="    margin-bottom: 13px;" value="Submit Access code" type="button" ng-click="login()" />
+            </div>
+
+            <hr />
+            <div ng-show="Docs.length > 0" class="resultsBlock">
+                <div ng-if="isExpired === false" style="display: inline; padding-right: 4px;"> Text Items Expires In:</div>
+                <div class="counter" style="background-color: rgb(247, 145, 145); display: inline" id="demo"></div>
+                <table style="padding-top: 13px; display: block">
+                    
+                    <tbody style="display: block">
+
+                    <tr class="resRow" ng-repeat="x in Docs">
+                        <td style="display: inline-flex">
+                            @*<div ng-if="x.IsDocument === false">{{x.MessageText}}</div>*@
+                            <div class="item" ng-if="x.IsDoc === true && isExpired === false"> Item-{{$index + 1}} -- File Name: {{x.DocumentName}} <a style="font-size: small" href="~/Home/DownloadDoc?documentId={{x.DocumentId}}">download</a></div>
+
+                            <div class="item" ng-if="x.IsDoc === true && isExpired === true"> Item-{{$index + 1}} -- File Name: {{x.DocumentName}} --</div>
+
+                            <div style="padding-right: 22px" class="item" ng-if="x.IsDoc === false && isExpired === false">
+                                Item-{{$index + 1}}
+
+
+                                @*<input type="text" id="myInput" value="{{x.TransportText}}"  style="">*@
+                            </div>
+
+                            <div class="item" ng-if="x.IsDoc === false && isExpired === true"> Item-{{$index + 1}} -- Text Value: -- </div>
+                            
+                            <button ng-if="x.IsDoc === false && isExpired === false" ng-click="CopyToClip(x.TransportText,$index + 1 )" type="button" style="font-size: small">copy to clipboard</button>
+                            <div style="color: green; font-weight: 600;" id="{{$index + 1}}Item"></div>
+
+
+
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+        <hr />
+        <div class="actionBlock" style="padding-top: 18px;border-radius: inherit;" ng-show="Upload === true">
+            <div style="display: inline">Set Access-code</div>
+            <input style="display: inline" type="number" ng-model="AccessCode" />
+            @*<input value="Upload File" type="button" ng-click="upload()"/>*@
+
+            <form name="form">
+                <span style="display: block; margin-top: 11px">
+                    Select Document:
+                    <div class="button btn btn-success" ngf-select ng-model="file" name="file"
+                         ngf-max-size="7MB">Select</div>
+                </span>
+                <br />
+
+
+                <button ng-show="RequestPending === false" style="margin-top: 11px" type="button" class="btn" ng-click="submit()">Transport</button>
+
+
+            </form>
+            Selected File:<b> {{file.name == null ? 'None' :file.name }}</b>
+
+
+
+            <span style="display: block;margin-bottom: 23px;"></span>
+        </div>
+
+        <div class="actionBlock" style="padding-top: 18px;border-radius: inherit;" ng-show="TransportText === true">
+            <div style="display: inline">Set Access-code</div>
+            <input style="display: inline" type="number" ng-model="AccessCode" />
+            <input type="button" ng-click="RandomAccessCode()" value="Generate Random Access code"/>
+            @*<input value="Upload File" type="button" ng-click="upload()"/>*@
+
+            <div style="display: block;padding-top: 10px;"> <label for="TransportMessage">Message:</label>
+                <textarea id="TransportMessage" class="Custom" ng-model="TextToSend"></textarea></div>
+            <input style="    margin-bottom: 13px;" value="Transport Text" type="button" ng-click="Transport()" />
+
+
+
+            <span style="display: block;margin-bottom: 23px;"></span>
+        </div>
+
+        <div style="text-align: center; color: red">{{UploadDocServerResponse}}</div>
+        
+
+    </div>
+
+</div>
+
+@section Scripts{
+    
+    
+    <script src="~/Scripts/ng-file-upload.min.js"></script>
+    <script src="~/WebHelpers/Assets/Js/Transport.js"></script>
+
+}

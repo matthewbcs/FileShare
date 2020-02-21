@@ -1,0 +1,12 @@
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\TransportApp.Model.dll.config
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\TransportApp.Model.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\TransportApp.Model.pdb
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\EntityFramework.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\EntityFramework.xml
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\obj\Debug\TransportApp.Model.csproj.CoreCompileInputs.cache
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\obj\Debug\TransportApp.Model.csproj.CopyComplete
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\obj\Debug\TransportApp.Model.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\obj\Debug\TransportApp.Model.pdb
+C:\Personal Projects\Transport\TransportApp\TransportApp.Model\obj\Debug\TransportApp.Model.csprojAssemblyReference.cache

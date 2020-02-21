@@ -1,0 +1,152 @@
+﻿@using TransportApp.WebHelpers
+@model TransportApp.Model.ViewModel.TransportViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<script>
+    if (typeof (controllerData) == "undefined") {
+        var controllerData = {};
+    }
+    controllerData.TransportModel = {
+        
+        Docs: [],
+        Messages: [],
+        userAccess: null,
+        FileName: null,
+        UploadDocServerResponse: null,
+        Download: false,
+        Upload: false,
+        TransportText: false,
+        TextToSend: null,
+        isExpired: false,
+        RequestPending:false
+    }
+
+</script>
+<style>
+    body {
+        background-color: #111629
+    }
+
+    .square {
+        height: auto;
+        width: 94%;
+        margin-left: 58px;
+        background-color: white;
+        padding-top: 23px;
+        border-radius: 10%;
+    }
+    #Upload :hover {
+        color: black;
+        font-size: larger
+
+    }
+    #Download :hover {
+        color: black;
+        font-size: larger
+    }
+    .imgIcon {
+        width: 13%
+    }
+    .imgIcon2 {
+        width: 29%
+    }
+    .imgIcon3 {
+        width: 13%;
+    }
+    #logo {
+        width: 52%
+    }
+    .actionBlock {
+        background-color: rgb(237, 201, 245);
+        text-align: center;
+       
+    }
+    .resultsBlock {
+        /*background-color: rgb(201, 232, 245);*/
+        text-align: center;
+        padding-top: 10px
+    }
+    .resRow {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: x-large;
+        border-bottom: double;
+        border-top: double;
+        background-color: antiquewhite;
+    }
+    .item {
+        display: inline
+    }
+    .Custom {
+        width: 300px;
+        height: 100px;
+    }
+</style>
+
+
+<div class="row">
+    <div ng-app="app" ng-controller="TransportCtrl" class="col-md-4 square">
+
+        @*<div style="text-align: center">File Transporter</div>*@
+        <div style="text-align: center">
+            <img id="logo" src="~/WebHelpers/Assets/img/fileshare.png" />
+        </div>
+
+        <div style="display: block; width: 100%;text-align: center">
+            <a ng-click="Upload = true;Download = false ;TransportText = false" href="#">
+                <div style="display: inline; padding-right: 12px" id="Upload" ng-click="Upload = true">
+                    <img class="imgIcon" src="~/WebHelpers/Assets/img/upload doc.png" />
+                </div>
+            </a>
+           
+
+        </div>
+
+ 
+
+  
+        <div class="actionBlock" style="padding-top: 18px;border-radius: inherit;" ng-show="Upload === true">
+            <div style="display: inline">Set Access-code</div>
+            <input style="display: inline" type="number" ng-model="FileName" />
+            @*<input value="Upload File" type="button" ng-click="upload()"/>*@
+
+            <form name="form">
+                <span style="display: block; margin-top: 11px">
+                    Select Document:
+                    <div class="button btn btn-success" ngf-select ng-model="file" name="file"
+                         ngf-max-size="7MB">Select</div>
+                </span>
+                <br />
+
+
+                <button ng-show="RequestPending === false" style="margin-top: 11px" type="button" class="btn" ng-click="submit()">Transport</button>
+
+
+            </form>
+            Selected File:<b> {{file.name == null ? 'None' :file.name }}</b>
+
+
+
+            <span style="display: block;margin-bottom: 23px;"></span>
+        </div>
+
+
+
+        <div style="text-align: center; color: red">{{UploadDocServerResponse}}</div>
+        
+
+    </div>
+
+</div>
+
+@section Scripts{
+    
+    
+    <script src="~/Scripts/ng-file-upload.min.js"></script>
+    <script src="~/WebHelpers/Assets/Js/Transport.js"></script>
+
+}

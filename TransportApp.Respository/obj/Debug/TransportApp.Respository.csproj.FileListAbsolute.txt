@@ -1,0 +1,15 @@
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\TransportApp.Respository.dll.config
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\TransportApp.Respository.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\TransportApp.Respository.pdb
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\EntityFramework.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\EntityFramework.xml
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\obj\Debug\TransportApp.Respository.csprojAssemblyReference.cache
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\obj\Debug\TransportApp.Respository.csproj.CoreCompileInputs.cache
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\obj\Debug\TransportApp.Respository.csproj.CopyComplete
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\obj\Debug\TransportApp.Respository.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\obj\Debug\TransportApp.Respository.pdb
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\TransportApp.Model.dll
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\TransportApp.Model.pdb
+C:\Personal Projects\Transport\TransportApp\TransportApp.Respository\bin\Debug\TransportApp.Model.dll.config
